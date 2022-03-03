@@ -196,9 +196,11 @@ def main():
         # Build info dict containing metadata on all scans in FW project
         print(f"Gathering metadata from Flywheel project '{project.label}' for scans created on or after '{min_date}'...")
         info = get_recent_metadata_for(project, min_date)      
-
+    
     # Else query for all scans in Flywheel project.
     else:
+        
+        min_date = None
 
         # Build info dict containing metadata on all scans in FW project
         print(f"Gathering all scan metadata from Flywheel project '{project.label}'...")
@@ -216,3 +218,4 @@ def main():
 
 if __name__== "__main__":
     main()
+q
