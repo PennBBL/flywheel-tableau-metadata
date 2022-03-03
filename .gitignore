@@ -1,5 +1,6 @@
 *~
 *data/
+*project_data/
 *.vscode
 *.DS_Store*
 *.code-workspace
