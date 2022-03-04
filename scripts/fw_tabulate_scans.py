@@ -72,7 +72,7 @@ def get_all_metadata_for(project):
 
     # Create info dict with entries for each nifti.
     info = {}
-
+    
     # Loop through subjects in project
     for sub in tqdm(project.subjects(), desc=f"Subjects processed", unit="subject", position=0):
 
@@ -101,7 +101,7 @@ def get_all_metadata_for(project):
                             
                             # Add the folowing metadata to study info dict: fileID --> [subId, sesId, acqLabel, fileName, seriesNum, timestamp]
                             info[fileId] = [sub.label, ses.label, acq.label, f.name, seriesNum, timestamp, f.created.replace(tzinfo=None)]
-
+                            
                     # Update progress bar upon completion of each acq
                     pbar.update(1)
 
@@ -172,7 +172,7 @@ def main():
     parser.add_argument('-p', '--project', required=True,
                         help='project label on Flywheel')
 
-    parser.add_argument('-o', '--output',
+    parser.add_argument('-o', '--output', 
                         help='path to output directory',
                         default='')
 
@@ -213,7 +213,8 @@ def main():
     # Export dataframe to csv
     filename = f"FlywheelDump_{project.label}_{min_date if min_date else 'all_scans'}_to_{date.today()}.csv"
     fullpath = os.path.join(args.output, filename)
-    os.makedirs(args.output, exist_ok = True)
+    if args.output:
+            os.makedirs(args.output, exist_ok = True)
     df.to_csv(fullpath, index=False)
 
 if __name__== "__main__":
